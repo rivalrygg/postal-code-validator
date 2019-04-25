@@ -1,6 +1,11 @@
 # Postal-code-validator
 
-Validate Formatting of World-Wide Postal Codes according this ["List of postal codes" article on Wikipedia](https://en.wikipedia.org/wiki/List_of_postal_codes)
+Validate Formatting of World-Wide Postal Codes according this [Libaddressinput](https://github.com/googlei18n/libaddressinput) available at [AddressDataService](https://chromium-i18n.appspot.com/ssl-address)
+
+### Breaking Changes:
+
++ Whitespace is always ignored in the regex.
++ Added the ability to check case sensitivity.
 
 ## Usage
 
@@ -18,6 +23,8 @@ Validate Formatting of World-Wide Postal Codes according this ["List of postal c
     $validator = new Validator();
     $validator->isValid('CH', 'usjU87jsdf'); // returns false
     $validator->isValid('CH', '3007'); // returns true
+    $validator->isValid('CA', 'h0h0h0'); // returns true
+    $validator->isValid('CA', 'h0h0h0', true); // returns false, enable case sensitive regex.
 
 ### Get The Possible Formats For a Specific Country
 
