@@ -22,306 +22,299 @@ class Validator
      *     # - numberic 0-9
      *     @ - alpha a-zA-Z
      */
-    protected $formats = array(
-        'AC' => array(),                            # Ascension
-        'AD' => array('AD###', '#####'),            # ANDORRA
-        'AE' => array(),                            # UNITED ARAB EMIRATES
-        'AF' => array('####'),                      # AFGHANISTAN
-        'AG' => array(),                            # ANTIGUA AND BARBUDA
-        'AI' => array('AI-2640'),                   # ANGUILLA
-        'AL' => array('####'),                      # ALBANIA
-        'AM' => array('####'),                      # ARMENIA
-        'AN' => array(),                            # NETHERLANDS ANTILLES
-        'AO' => array(),                            # ANGOLA
-        'AQ' => array('BIQQ 1ZZ'),                  # ANTARCTICA
-        'AR' => array('####', '@####@@@'),          # ARGENTINA
-        'AS' => array('#####', '#####-####'),       # AMERICAN SAMOA
-        'AT' => array('####'),                      # AUSTRIA
-        'AU' => array('####'),                      # AUSTRALIA
-        'AW' => array(),                            # ARUBA
-        'AX' => array('#####', 'AX-#####'),         # Åland
-        'AZ' => array('AZ ####'),                   # AZERBAIJAN
+    protected $formats = [
+        'AC' => 'ASCN 1ZZ',                             # Ascension
+        'AD' => 'AD[1-7]0\d',                           # ANDORRA
+        'AE' => '',                                     # UNITED ARAB EMIRATES
+        'AF' => '\d{4}',                                # AFGHANISTAN
+        'AG' => '',                                     # ANTIGUA AND BARBUDA
+        'AI' => '(?:AI-)?2640',                         # ANGUILLA
+        'AL' => '\d{4}',                                # ALBANIA
+        'AM' => '(?:37)?\d{4}',                         # ARMENIA
+        'AN' => '',                                     # NETHERLANDS ANTILLES
+        'AO' => '',                                     # ANGOLA
+        'AQ' => 'BIQQ 1ZZ',                             # ANTARCTICA
+        'AR' => '((?:[A-HJ-NP-Z])?\d{4})([A-Z]{3})?',   # ARGENTINA
+        'AS' => '(96799)(?:[ \-](\d{4}))?',             # AMERICAN SAMOA
+        'AT' => '\d{4}',                                # AUSTRIA
+        'AU' => '\d{4}',                                # AUSTRALIA
+        'AW' => '',                                     # ARUBA
+        'AX' => '22\d{3}',                              # Åland
+        'AZ' => '\d{4}',                                # AZERBAIJAN
 
-        'BA' => array('#####'),                     # BOSNIA AND HERZEGOWINA
-        'BB' => array('BB#####'),                   # BARBADOS
-        'BD' => array('####'),                      # BANGLADESH
-        'BE' => array('####'),                      # BELGIUM
-        'BF' => array(),                            # BURKINA FASO
-        'BG' => array('####'),                      # BULGARIA
-        'BH' => array('###', '####'),               # BAHRAIN
-        'BI' => array(),                            # BURUNDI
-        'BJ' => array(),                            # BENIN
-        'BL' => array('#####'),                     # Sankt Bartholomäus
-        'BM' => array('@@ ##', '@@ @@'),            # BERMUDA
-        'BN' => array('@@####'),                    # BRUNEI DARUSSALAM
-        'BO' => array(),                            # BOLIVIA
-        'BQ' => array(),                            # Karibische Niederlande
-        'BR' => array('#####-###', '#####'),        # BRAZIL
-        'BS' => array(),                            # BAHAMAS
-        'BT' => array('#####'),                     # BHUTAN
-        'BV' => array(),                            # BOUVET ISLAND
-        'BW' => array(),                            # BOTSWANA
-        'BY' => array('######'),                    # BELARUS
-        'BZ' => array(),                            # BELIZE
+        'BA' => '\d{5}',                                # BOSNIA AND HERZEGOWINA
+        'BB' => 'BB\d{5}',                              # BARBADOS
+        'BD' => '\d{4}',                                # BANGLADESH
+        'BE' => '\d{4}',                                # BELGIUM
+        'BF' => '',                                     # BURKINA FASO
+        'BG' => '\d{4}',                                # BULGARIA
+        'BH' => '(?:\d|1[0-2])\d{2}',                   # BAHRAIN
+        'BI' => '',                                     # BURUNDI
+        'BJ' => '',                                     # BENIN
+        'BL' => '9[78][01]\d{2}',                       # Sankt Bartholomäus
+        'BM' => '[A-Z]{2} ?[A-Z0-9]{2}',                # BERMUDA
+        'BN' => '[A-Z]{2} ?\d{4}',                      # BRUNEI DARUSSALAM
+        'BO' => '',                                     # BOLIVIA
+        'BQ' => '',                                     # Karibische Niederlande
+        'BR' => '\d{5}-?\d{3}',                         # BRAZIL
+        'BS' => '',                                     # BAHAMAS
+        'BT' => '\d{5}',                                # BHUTAN
+        'BV' => '',                                     # BOUVET ISLAND
+        'BW' => '',                                     # BOTSWANA
+        'BY' => '\d{6}',                                # BELARUS
+        'BZ' => '',                                     # BELIZE
 
-        'CA' => array('@#@ #@#'),                   # CANADA
-        'CC' => array('####'),                      # COCOS (KEELING) ISLANDS
-        'CD' => array(),                            # CONGO, Democratic Republic of (was Zaire)
-        'CF' => array(),                            # CENTRAL AFRICAN REPUBLIC
-        'CG' => array(),                            # CONGO, People's Republic of
-        'CH' => array('####'),                      # SWITZERLAND
-        'CI' => array(),                            # COTE D'IVOIRE
-        'CK' => array(),                            # COOK ISLANDS
-        'CL' => array('#######', '###-####'),       # CHILE
-        'CM' => array(),                            # CAMEROON
-        'CN' => array('######'),                    # CHINA
-        'CO' => array('######'),                    # COLOMBIA
-        'CR' => array('#####', '#####-####'),       # COSTA RICA
-        'CU' => array('#####'),                     # CUBA
-        'CV' => array('####'),                      # CAPE VERDE
-        'CW' => array(),                            # Curaçao
-        'CX' => array('####'),                      # CHRISTMAS ISLAND
-        'CY' => array('####'),                      # Cyprus
-        'CZ' => array('### ##'),                    # Czech Republic
+        'CA' => '[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJ-NPRSTV-Z] ?\d[ABCEGHJ-NPRSTV-Z]\d', # CANADA
+        'CC' => '6799',                                 # COCOS (KEELING) ISLANDS
+        'CD' => '',                                     # CONGO, Democratic Republic of (was Zaire)
+        'CF' => '',                                     # CENTRAL AFRICAN REPUBLIC
+        'CG' => '',                                     # CONGO, People's Republic of
+        'CH' => '\d{4}',                                # SWITZERLAND
+        'CI' => '',                                     # COTE D'IVOIRE
+        'CK' => '',                                     # COOK ISLANDS
+        'CL' => '\d{7}',                                # CHILE
+        'CM' => '',                                     # CAMEROON
+        'CN' => '\d{6}',                                # CHINA
+        'CO' => '\d{6}',                                # COLOMBIA
+        'CR' => '\d{4,5}|\d{3}-\d{4}',                  # COSTA RICA
+        'CU' => '\d{5}',                                # CUBA
+        'CV' => '\d{4}',                                # CAPE VERDE
+        'CW' => '',                                     # Curaçao
+        'CX' => '6798',                                 # CHRISTMAS ISLAND
+        'CY' => '\d{4}',                                # Cyprus
+        'CZ' => '\d{3} ?\d{2}',                         # Czech Republic
 
-        'DE' => array('#####'),                     # GERMANY
-        'DJ' => array(),                            # DJIBOUTI
-        'DK' => array('####'),                      # DENMARK
-        'DM' => array(),                            # DOMINICA
-        'DO' => array('#####'),                     # DOMINICAN REPUBLIC
-        'DZ' => array('#####'),                     # ALGERIA
+        'DE' => '\d{5}',                                # GERMANY
+        'DJ' => '',                                     # DJIBOUTI
+        'DK' => '\d{4}',                                # DENMARK
+        'DM' => '',                                     # DOMINICA
+        'DO' => '\d{5}',                                # DOMINICAN REPUBLIC
+        'DZ' => '\d{5}',                                # ALGERIA
 
-        'EC' => array('######'),                    # ECUADOR
-        'EE' => array('#####'),                     # ESTONIA
-        'EG' => array('#####'),                     # EGYPT
-        'EH' => array(),                            # WESTERN SAHARA
-        'ER' => array(),                            # ERITREA
-        'ES' => array('#####'),                     # SPAIN
-        'ET' => array('####'),                      # ETHIOPIA
+        'EC' => '\d{6}',                                # ECUADOR
+        'EE' => '\d{5}',                                # ESTONIA
+        'EG' => '\d{5}',                                # EGYPT
+        'EH' => '\d{5}',                                # WESTERN SAHARA
+        'ER' => '',                                     # ERITREA
+        'ES' => '\d{5}',                                # SPAIN
+        'ET' => '\d{4}',                                # ETHIOPIA
 
-        'FI' => array('#####'),                     # FINLAND
-        'FJ' => array(),                            # FIJI
-        'FK' => array('FIQQ 1ZZ'),                  # FALKLAND ISLANDS (MALVINAS)
-        'FM' => array('#####', '#####-####'),       # MICRONESIA
-        'FO' => array('###'),                       # FAROE ISLANDS
-        'FR' => array('#####'),                     # FRANCE
-        'FX' => array(),                            # FRANCE, METROPOLITAN
+        'FI' => '\d{5}',                                # FINLAND
+        'FJ' => '',                                     # FIJI
+        'FK' => 'FIQQ 1ZZ',                             # FALKLAND ISLANDS (MALVINAS)
+        'FM' => '(9694[1-4])(?:[ \-](\d{4}))?',         # MICRONESIA
+        'FO' => '\d{3}',                                # FAROE ISLANDS
+        'FR' => '\d{2} ?\d{3}',                         # FRANCE
+        'FX' => '',                                     # FRANCE, METROPOLITAN
 
-        'GA' => array(),                            # GABON
-        'GB' => array('@@## #@@', '@#@ #@@', '@@# #@@', '@@#@ #@@', '@## #@@', '@# #@@'), # UK
-        'GD' => array(),                            # GRENADA
-        'GE' => array('####'),                      # GEORGIA
-        'GF' => array('973##'),                     # FRENCH GUIANA
-        'GG' => array('GY# #@@', 'GY## #@@'),       # Guernsey
-        'GH' => array(),                            # GHANA
-        'GI' => array('GX11 1AA'),                  # GIBRALTAR
-        'GL' => array('####'),                      # GREENLAND
-        'GM' => array(),                            # GAMBIA
-        'GN' => array('###'),                       # GUINEA
-        'GP' => array('971##'),                     # GUADELOUPE
-        'GQ' => array(),                            # EQUATORIAL GUINEA
-        'GR' => array('### ##'),                    # GREECE
-        'GS' => array('SIQQ 1ZZ'),                  # SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS
-        'GT' => array('#####'),                     # GUATEMALA
-        'GU' => array('#####', '#####-####'),       # GUAM
-        'GW' => array('####'),                      # GUINEA-BISSAU
-        'GY' => array(),                            # GUYANA
+        'GA' => '',                                     # GABON
+        'GB' => 'GIR ?0AA|(?:(?:AB|AL|B|BA|BB|BD|BF|BH|BL|BN|BR|BS|BT|BX|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)(?:\d[\dA-Z]? ?\d[ABD-HJLN-UW-Z]{2}))|BFPO ?\d{1,4}', # UK
+        'GD' => '',                                     # GRENADA
+        'GE' => '\d{4}',                                # GEORGIA
+        'GF' => '9[78]3\d{2}',                          # FRENCH GUIANA
+        'GG' => 'GY\d[\dA-Z]? ?\d[ABD-HJLN-UW-Z]{2}',   # Guernsey
+        'GH' => '',                                     # GHANA
+        'GI' => 'GX11 1AA',                             # GIBRALTAR
+        'GL' => '39\d{2}',                              # GREENLAND
+        'GM' => '',                                     # GAMBIA
+        'GN' => '\d{3}',                                # GUINEA
+        'GP' => '9[78][01]\d{2}',                       # GUADELOUPE
+        'GQ' => '',                                     # EQUATORIAL GUINEA
+        'GR' => '\d{3} ?\d{2}',                         # GREECE
+        'GS' => 'SIQQ 1ZZ',                             # SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS
+        'GT' => '\d{5}',                                # GUATEMALA
+        'GU' => '(969(?:[12]\d|3[12]))(?:[ \-](\d{4}))?',                   # GUAM
+        'GW' => '\d{4}',                                # GUINEA-BISSAU
+        'GY' => '',                                     # GUYANA
 
-        'HK' => array(),                            # HONG KONG
-        'HM' => array(),                            # HEARD AND MC DONALD ISLANDS
-        'HN' => array('@@####', '#####'),           # HONDURAS
-        'HR' => array('#####'),                     # CROATIA
-        'HT' => array('####'),                      # HAITI
-        'HU' => array('####'),                      # HUNGARY
+        'HK' => '',                                     # HONG KONG
+        'HM' => '',                                     # HEARD AND MC DONALD ISLANDS
+        'HN' => '([A-Z])?\d{5}',                        # HONDURAS
+        'HR' => '\d{5}',                                # CROATIA
+        'HT' => '\d{4}',                                # HAITI
+        'HU' => '\d{4}',                                # HUNGARY
 
-        'IC' => array('#####'),                     # THE CANARY ISLANDS
-        'ID' => array('#####'),                     # INDONESIA
-        'IE' => array('@** ****'),                  # IRELAND
-        'IL' => array('#######'),                   # ISRAEL
-        'IM' => array('IM# #@@', 'IM## #@@'),       # Isle of Man
-        'IN' => array('######', '### ###'),         # INDIA
-        'IO' => array('BBND 1ZZ'),                  # BRITISH INDIAN OCEAN TERRITORY
-        'IQ' => array('#####'),                     # IRAQ
-        'IR' => array('##########', '#####-#####'), # IRAN
-        'IS' => array('###'),                       # ICELAND
-        'IT' => array('#####'),                     # ITALY
+        'IC' => '\d{5}',                                # THE CANARY ISLANDS
+        'ID' => '\d{5}',                                # INDONESIA
+        'IE' => '[\dA-Z]{3} ?[\dA-Z]{4}',               # IRELAND
+        'IL' => '\d{5}(?:\d{2})?',                      # ISRAEL
+        'IM' => 'IM\d[\dA-Z]? ?\d[ABD-HJLN-UW-Z]{2}',   # Isle of Man
+        'IN' => '\d{6}',                                # INDIA
+        'IO' => 'BBND 1ZZ',                             # BRITISH INDIAN OCEAN TERRITORY
+        'IQ' => '\d{5}',                                # IRAQ
+        'IR' => '\d{5}-?\d{5}',                         # IRAN
+        'IS' => '\d{3}',                                # ICELAND
+        'IT' => '\d{5}',                                # ITALY
 
-        'JE' => array('JE# #@@', 'JE## #@@'),       # Jersey
-        'JM' => array('##'),                        # JAMAICA
-        'JO' => array('#####'),                     # JORDAN
-        'JP' => array('###-####', '###'),           # JAPAN
+        'JE' => 'JE\d[\dA-Z]? ?\d[ABD-HJLN-UW-Z]{2}',   # Jersey
+        'JM' => '\d{2}',                                # JAMAICA
+        'JO' => '\d{5}',                                # JORDAN
+        'JP' => '\d{3}-?\d{4}',                         # JAPAN
 
-        'KE' => array('#####'),                     # KENYA
-        'KG' => array('######'),                    # KYRGYZSTAN
-        'KH' => array('#####'),                     # CAMBODIA
-        'KI' => array(),                            # KIRIBATI
-        'KM' => array(),                            # COMOROS
-        'KN' => array(),                            # SAINT KITTS AND NEVIS
-        'KO' => array(),                            # Kosovo
-        'KP' => array(),                            # NORTH KOREA
-        'KR' => array('###-###', '#####'),          # SOUTH KOREA
-        'KW' => array('#####'),                     # KUWAIT
-        'KY' => array('KY#-####'),                  # CAYMAN ISLANDS
-        'KZ' => array('######'),                    # KAZAKHSTAN
+        'KE' => '\d{5}',                                # KENYA
+        'KG' => '\d{6}',                                # KYRGYZSTAN
+        'KH' => '\d{5}',                                # CAMBODIA
+        'KI' => '',                                     # KIRIBATI
+        'KM' => '',                                     # COMOROS
+        'KN' => '',                                     # SAINT KITTS AND NEVIS
+        'KO' => '',                                     # Kosovo
+        'KP' => '',                                     # NORTH KOREA
+        'KR' => '\d{5}',                                # SOUTH KOREA
+        'KW' => '\d{5}',                                # KUWAIT
+        'KY' => 'KY\d-\d{4}',                           # CAYMAN ISLANDS
+        'KZ' => '\d{6}',                                # KAZAKHSTAN
 
-        'LA' => array('#####'),                     # LAO PEOPLE'S DEMOCRATIC REPUBLIC
-        'LB' => array('#####', '#### ####'),        # LEBANON
-        'LC' => array('LC## ###'),                  # SAINT LUCIA
-        'LI' => array('####'),                      # LIECHTENSTEIN
-        'LK' => array('#####'),                     # SRI LANKA
-        'LR' => array('####'),                      # LIBERIA
-        'LS' => array('###'),                       # LESOTHO
-        'LT' => array('LT-#####'),                  # LITHUANIA
-        'LU' => array('####'),                      # LUXEMBOURG
-        'LV' => array('LV-####'),                   # LATVIA
-        'LY' => array(),                            # LIBYAN ARAB JAMAHIRIYA
+        'LA' => '\d{5}',                                # LAO PEOPLE'S DEMOCRATIC REPUBLIC
+        'LB' => '(?:\d{4})(?: ?(?:\d{4}))?',            # LEBANON
+        'LC' => 'LC\d{2} \d{3}',                        # SAINT LUCIA
+        'LI' => '948[5-9]|949[0-8]',                    # LIECHTENSTEIN
+        'LK' => '\d{5}',                                # SRI LANKA
+        'LR' => '\d{4}',                                # LIBERIA
+        'LS' => '\d{3}',                                # LESOTHO
+        'LT' => 'LV-\d{5}',                             # LITHUANIA
+        'LU' => '\d{4}',                                # LUXEMBOURG
+        'LV' => 'LV-\d{4}',                             # LATVIA
+        'LY' => '',                                     # LIBYAN ARAB JAMAHIRIYA
 
-        'MA' => array('#####'),                     # MOROCCO
-        'MC' => array('980##'),                     # MONACO
-        'MD' => array('MD####', 'MD-####'),         # MOLDOVA
-        'ME' => array('#####'),                     # MONTENEGRO
-        'MF' => array('97150'),                     # Saint-Martin
-        'MG' => array('###'),                       # MADAGASCAR
-        'MH' => array('#####', '#####-####'),       # MARSHALL ISLANDS
-        'MK' => array('####'),                      # MACEDONIA
-        'ML' => array(),                            # MALI
-        'MM' => array('#####'),                     # MYANMAR
-        'MN' => array('#####'),                     # MONGOLIA
-        'MO' => array(),                            # MACAU
-        'MP' => array('#####', '#####-####'),       # SAIPAN, NORTHERN MARIANA ISLANDS
-        'MQ' => array('972##'),                     # MARTINIQUE
-        'MR' => array(),                            # MAURITANIA
-        'MS' => array(),                            # MONTSERRAT
-        'MT' => array('@@@ ####'),                  # MALTA
-        'MU' => array('#####'),                     # MAURITIUS
-        'MV' => array('#####'),                     # MALDIVES
-        'MW' => array(),                            # MALAWI
-        'MX' => array('#####'),                     # MEXICO
-        'MY' => array('#####'),                     # MALAYSIA
-        'MZ' => array('####'),                      # MOZAMBIQUE
+        'MA' => '\d{5}',                                # MOROCCO
+        'MC' => '980\d{2}',                             # MONACO
+        'MD' => 'MD-?\d{4}',                            # MOLDOVA
+        'ME' => '8\d{4}',                               # MONTENEGRO
+        'MF' => '9[78][01]\d{2}',                       # Saint-Martin
+        'MG' => '\d{3}',                                # MADAGASCAR
+        'MH' => '(969[67]\d)(?:[ \-](\d{4}))?',         # MARSHALL ISLANDS
+        'MK' => '\d{4}',                                # MACEDONIA
+        'ML' => '',                                     # MALI
+        'MM' => '\d{5}',                                # MYANMAR
+        'MN' => '\d{5}',                                # MONGOLIA
+        'MO' => '',                                     # MACAU
+        'MP' => '(9695[012])(?:[ \-](\d{4}))?',         # SAIPAN, NORTHERN MARIANA ISLANDS
+        'MQ' => '9[78]2\d{2}',                          # MARTINIQUE
+        'MR' => '',                                     # MAURITANIA
+        'MS' => '',                                     # MONTSERRAT
+        'MT' => '[A-Z]{3} ?\d{2,4}',                    # MALTA
+        'MU' => '\d{3}(?:\d{2}|[A-Z]{2}\d{3})',         # MAURITIUS
+        'MV' => '\d{5}',                                # MALDIVES
+        'MW' => '',                                     # MALAWI
+        'MX' => '\d{5}',                                # MEXICO
+        'MY' => '\d{5}',                                # MALAYSIA
+        'MZ' => '\d{4}',                                # MOZAMBIQUE
 
-        'NA' => array(),                            # NAMIBIA
-        'NC' => array('988##'),                     # NEW CALEDONIA
-        'NE' => array('####'),                      # NIGER
-        'NF' => array('####'),                      # NORFOLK ISLAND
-        'NG' => array('######'),                    # NIGERIA
-        'NI' => array('#####'),                     # NICARAGUA
-        'NL' => array('#### @@'),                   # NETHERLANDS
-        'NO' => array('####'),                      # NORWAY
-        'NP' => array('#####'),                     # NEPAL
-        'NR' => array(),                            # NAURU
-        'NU' => array(),                            # NIUE
-        'NZ' => array('####'),                      # NEW ZEALAND
+        'NA' => '\d{5}',                                # NAMIBIA
+        'NC' => '988\d{2}',                             # NEW CALEDONIA
+        'NE' => '\d{4}',                                # NIGER
+        'NF' => '\d{4}',                                # NORFOLK ISLAND
+        'NG' => '\d{6}',                                # NIGERIA
+        'NI' => '\d{5}',                                # NICARAGUA
+        'NL' => '\d{4} ?[A-Z]{2}',                      # NETHERLANDS
+        'NO' => '\d{4}',                                # NORWAY
+        'NP' => '\d{5}',                                # NEPAL
+        'NR' => '',                                     # NAURU
+        'NU' => '',                                     # NIUE
+        'NZ' => '\d{4}',                                # NEW ZEALAND
 
-        'OM' => array('###'),                       # OMAN
+        'OM' => '(?:PC )?\d{3}',                        # OMAN
 
-        'PA' => array('####'),                      # PANAMA
-        'PE' => array('#####', 'PE #####'),         # PERU
-        'PF' => array('987##'),                     # FRENCH POLYNESIA
-        'PG' => array('###'),                       # PAPUA NEW GUINEA
-        'PH' => array('####'),                      # PHILIPPINES
-        'PK' => array('#####'),                     # PAKISTAN
-        'PL' => array('##-###'),                    # POLAND
-        'PM' => array('97500'),                     # ST. PIERRE AND MIQUELON
-        'PN' => array('PCRN 1ZZ'),                  # PITCAIRN
-        'PR' => array('#####', '#####-####'),       # PUERTO RICO
-        'PS' => array('###'),                       # PALESTINIAN TERRITORY
-        'PT' => array('####-###'),                  # PORTUGAL
-        'PW' => array('#####', '#####-####'),       # PALAU
-        'PY' => array('####'),                      # PARAGUAY
+        'PA' => '\d{4}',                                # PANAMA
+        'PE' => '(?:LIMA \d{1,2}|CALLAO 0?\d)|[0-2]\d{4}', # PERU
+        'PF' => '987\d{2}',                             # FRENCH POLYNESIA
+        'PG' => '\d{3}',                                # PAPUA NEW GUINEA
+        'PH' => '\d{4}',                                # PHILIPPINES
+        'PK' => '\d{5}',                                # PAKISTAN
+        'PL' => '\d{2}-\d{3}',                          # POLAND
+        'PM' => '9[78]5\d{2}',                          # ST. PIERRE AND MIQUELON
+        'PN' => 'PCRN 1ZZ',                             # PITCAIRN
+        'PR' => '(00[679]\d{2})(?:[ \-](\d{4}))?',      # PUERTO RICO
+        'PS' => '',                                     # PALESTINIAN TERRITORY
+        'PT' => '\d{4}-\d{3}',                          # PORTUGAL
+        'PW' => '(969(?:39|40))(?:[ \-](\d{4}))?',      # PALAU
+        'PY' => '\d{4}',                                # PARAGUAY
 
-        'QA' => array(),                            # QATAR
+        'QA' => '',                                     # QATAR
 
-        'RE' => array('974##'),                     # REUNION
-        'RO' => array('######'),                    # ROMANIA
-        'RS' => array('#####'),                     # SERBIA
-        'RU' => array('######'),                    # RUSSIA
-        'RW' => array(),                            # RWANDA
+        'RE' => '9[78]4\d{2}',                          # REUNION
+        'RO' => '\d{6}',                                # ROMANIA
+        'RS' => '\d{5,6}',                              # SERBIA
+        'RU' => '\d{6}',                                # RUSSIA
+        'RW' => '',                                     # RWANDA
 
-        'SA' => array('#####', '#####-####'),       # SAUDI ARABIA
-        'SB' => array(),                            # SOLOMON ISLANDS
-        'SC' => array(),                            # SEYCHELLES
-        'SD' => array('#####'),                     # SUDAN
-        'SE' => array('### ##'),                    # SWEDEN
-        'SG' => array('######'),                    # SINGAPORE
-        'SH' => array('@@@@ 1ZZ'),                  # ST. HELENA
-        'SI' => array('####', 'SI-####'),           # SLOVENIA
-        'SJ' => array('####'),                      # SVALBARD AND JAN MAYEN ISLANDS
-        'SK' => array('### ##'),                    # SLOVAKIA
-        'SL' => array(),                            # SIERRA LEONE
-        'SM' => array('4789#'),                     # SAN MARINO
-        'SN' => array('#####'),                     # SENEGAL
-        'SO' => array('@@ #####'),                  # SOMALIA
-        'SR' => array(),                            # SURINAME
-        'SS' => array('#####'),                     # SOUTH SUDAN
-        'ST' => array(),                            # SAO TOME AND PRINCIPE
-        'SV' => array('####'),                      # EL SALVADOR
-        'SX' => array(),                            # Sint Maarten
-        'SY' => array(),                            # SYRIAN ARAB REPUBLIC
-        'SZ' => array('@###'),                      # SWAZILAND
+        'SA' => '\d{5}|\d{5}-\d{4}',                    # SAUDI ARABIA
+        'SB' => '',                                     # SOLOMON ISLANDS
+        'SC' => '',                                     # SEYCHELLES
+        'SD' => '\d{5}',                                # SUDAN
+        'SE' => '\d{3} ?\d{2}',                         # SWEDEN
+        'SG' => '\d{6}',                                # SINGAPORE
+        'SH' => '(?:ASCN|STHL) 1ZZ',                    # ST. HELENA
+        'SI' => '(SI-)?\d{4}',                          # SLOVENIA
+        'SJ' => '\d{4}',                                # SVALBARD AND JAN MAYEN ISLANDS
+        'SK' => '\d{3} ?\d{2}',                         # SLOVAKIA
+        'SL' => '',                                     # SIERRA LEONE
+        'SM' => '4789\d',                               # SAN MARINO
+        'SN' => '\d{5}',                                # SENEGAL
+        'SO' => '[A-Z]{2} ?\d{5}',                      # SOMALIA
+        'SR' => '',                                     # SURINAME
+        'SS' => '\d{5}',                                # SOUTH SUDAN
+        'ST' => '',                                     # SAO TOME AND PRINCIPE
+        'SV' => '\d{4}',                                # EL SALVADOR
+        'SX' => '',                                     # Sint Maarten
+        'SY' => '',                                     # SYRIAN ARAB REPUBLIC
+        'SZ' => '[HLMS]\d{3}',                          # SWAZILAND
 
-        'TA' => array(),                            # Tristan da Cunha
-        'TC' => array('TKCA 1ZZ'),                  # TURKS AND CAICOS ISLANDS
-        'TD' => array(),                            # CHAD
-        'TF' => array(),                            # FRENCH SOUTHERN TERRITORIES
-        'TG' => array(),                            # TOGO
-        'TH' => array('#####'),                     # THAILAND
-        'TJ' => array('######'),                    # TAJIKISTAN
-        'TK' => array(),                            # TOKELAU
-        'TL' => array(),                            # EAST TIMOR
-        'TM' => array('######'),                    # TURKMENISTAN
-        'TN' => array('####'),                      # TUNISIA
-        'TO' => array(),                            # TONGA
-        'TR' => array('#####'),                     # TURKEY
-        'TT' => array('######'),                    # TRINIDAD AND TOBAGO
-        'TV' => array(),                            # TUVALU
-        'TW' => array('###', '###-##'),             # TAIWAN
-        'TZ' => array('#####'),                     # TANZANIA
+        'TA' => 'TDCU 1ZZ',                             # Tristan da Cunha
+        'TC' => 'TKCA 1ZZ',                             # TURKS AND CAICOS ISLANDS
+        'TD' => '',                                     # CHAD
+        'TF' => '',                                     # FRENCH SOUTHERN TERRITORIES
+        'TG' => '',                                     # TOGO
+        'TH' => '\d{5}',                                # THAILAND
+        'TJ' => '\d{6}',                                # TAJIKISTAN
+        'TK' => '',                                     # TOKELAU
+        'TL' => '',                                     # EAST TIMOR
+        'TM' => '\d{6}',                                # TURKMENISTAN
+        'TN' => '\d{4}',                                # TUNISIA
+        'TO' => '',                                     # TONGA
+        'TR' => '\d{5}',                                # TURKEY
+        'TT' => '\d{6}',                                # TRINIDAD AND TOBAGO
+        'TV' => '',                                     # TUVALU
+        'TW' => '\d{3}(?:\d{2})?',                      # TAIWAN
+        'TZ' => '\d{4,5}',                              # TANZANIA
 
-        'UA' => array('#####'),                     # UKRAINE
-        'UG' => array(),                            # UGANDA
-        'UM' => array(),                            # UNITED STATES MINOR OUTLYING ISLANDS
-        'US' => array('#####', '#####-####'),       # USA
-        'UY' => array('#####'),                     # URUGUAY
-        'UZ' => array('######'),                    # USBEKISTAN
+        'UA' => '\d{5}',                                # UKRAINE
+        'UG' => '',                                     # UGANDA
+        'UM' => '96898',                                # UNITED STATES MINOR OUTLYING ISLANDS
+        'US' => '(\d{5})(?:[ \-](\d{4}))?',             # USA
+        'UY' => '\d{5}',                                # URUGUAY
+        'UZ' => '\d{6}',                                # USBEKISTAN
 
-        'VA' => array('00120'),                     # VATICAN CITY STATE
-        'VC' => array('VC####'),                    # SAINT VINCENT AND THE GRENADINES
-        'VE' => array('####', '####-@'),            # VENEZUELA
-        'VG' => array('VG####'),                    # VIRGIN ISLANDS (BRITISH)
-        'VI' => array('#####', '#####-####'),       # VIRGIN ISLANDS (U.S.)
-        'VN' => array('######'),                    # VIETNAM
-        'VU' => array(),                            # VANUATU
+        'VA' => '00120',                                # VATICAN CITY STATE
+        'VC' => 'VC\d{4}',                              # SAINT VINCENT AND THE GRENADINES
+        'VE' => '\d{4}',                                # VENEZUELA
+        'VG' => 'VG\d{4}',                              # VIRGIN ISLANDS (BRITISH)
+        'VI' => '(008(?:(?:[0-4]\d)|(?:5[01])))(?:[ \-](\d{4}))?',                  # VIRGIN ISLANDS (U.S.)
+        'VN' => '\d{6}',                                # VIETNAM
+        'VU' => '',                                     # VANUATU
 
-        'WF' => array('986##'),                     # WALLIS AND FUTUNA ISLANDS
-        'WS' => array('WS####'),                    # SAMOA
+        'WF' => '986\d{2}',                             # WALLIS AND FUTUNA ISLANDS
+        'WS' => 'WS\d{4}',                              # SAMOA
 
-        'YE' => array(),                            # YEMEN
-        'YT' => array('976##'),                     # MAYOTTE
+        'YE' => '',                                     # YEMEN
+        'YT' => '976\d{2}',                             # MAYOTTE
 
-        'ZA' => array('####'),                      # SOUTH AFRICA
-        'ZM' => array('#####'),                     # ZAMBIA
-        'ZW' => array(),                            # ZIMBABWE
+        'ZA' => '\d{4}',                                # SOUTH AFRICA
+        'ZM' => '\d{5}',                                # ZAMBIA
+        'ZW' => '',                                     # ZIMBABWE
     );
 
-    public function isValid($countryCode, $postalCode, $ignoreSpaces = false)
+    public function isValid($countryCode, $postalCode, $caseSensitive = false)
     {
-        if(!isset($this->formats[$countryCode]))
-        {
+        if (!isset($this->formats[$countryCode])) {
             throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
         }
         
-        foreach($this->formats[$countryCode] as $format)
-        {
-            #echo $postalCode . ' - ' . $this->getFormatPattern($format)."\n";
-            if(preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode))
-            {
-                return true;
-            }
+        if ($this->formats[$countryCode] == '') {
+            return true;
         }
-        
-        if(!count($this->formats[$countryCode]))
-        {
+
+        if (preg_match($this->getFormatPattern($this->formats[$countryCode], $caseSensitive), $postalCode)) {
             return true;
         }
         
@@ -343,17 +336,12 @@ class Validator
         return (isset($this->formats[$countryCode]));
     }
     
-    protected function getFormatPattern($format, $ignoreSpaces = false)
+    protected function getFormatPattern($format, $caseSensitive)
     {
-        $pattern = str_replace('#', '\d', $format);
-        $pattern = str_replace('@', '[a-zA-Z]', $pattern);
-        $pattern = str_replace('*', '[a-zA-Z0-9]', $pattern);
-
-        if ($ignoreSpaces)
-        {
-            $pattern = str_replace(' ', ' ?', $pattern);
+        if ($caseSensitive) {
+            return '/^' . $format . '$/';
+        } else {
+            return '/^' . $format . '$/i';
         }
-
-        return '/^' . $pattern . '$/';
     }
 }
